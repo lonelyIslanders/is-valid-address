@@ -14,6 +14,10 @@ app.get('/', async (req, res) => {
         res.send('无地址');
         return;
     }
+    if (!ethers.utils.isAddress(address)) {
+        res.send('无效地址')
+        return
+    }
     const bnb = ethers.utils.formatEther(await provider.getBalance(address));
     const USDTbalance = ethers.utils.formatEther(await BSC_USDT_CONTRACT.balanceOf(address));
 
